@@ -1,0 +1,68 @@
+<!--@Author: Caizhf-->
+<!--@CreateTime: 17-4-17-->
+<!--@Description: logback打印配置-->
+
+<configuration>
+	
+	<!-- 定义日志输出位置 -->
+    <property name="log.path" value="./log"></property>
+    <!-- 配置上下文 -->
+    <property name="log.context" value="glut"></property>
+    <property name="log.file.glut" value="glut_enroll"></property>
+
+    <!-- 设置上下文名称后,可以方便地区分来自不同应用程序的记录 -->
+    <contextName>${log.context}</contextName>
+	
+	<!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+        	<!-- 配置输出格式,%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符 -->
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}][%-5level][%thread][%class.%method:%line]:%m%n</pattern>
+        </encoder>
+    </appender>
+	
+	<!-- 定义每日文件输出 -->
+    <appender name="ALL_GLUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--按照每天生成日志文件 日志文件输出的文件名 -->
+            <fileNamePattern>${log.path}/${log.file.glut}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 文件保留天数 -->
+            <maxHistory>30</maxHistory>
+            <!-- 日志文件最大的大小 -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>5MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!-- 输出至文件的格式 -->
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}][%-5level][%thread][%class.%method:%line]:%m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- name代表:该包名下的log会被打印-->
+    <!--现在保持和平台一致,所有log打在同一个文件,不分info和error了-->
+    <!--注意,STDOUT 只会打印com.yy下打出的日志.-->
+    <!--如果在生产环境,则要把root中的appender注释掉.否则会打印到控制台 ,debug时可以打开.-->
+    <logger name="com.glut" level="INFO" additivity="false">
+        <appender-ref ref="ALL_GLUT"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <!-- <logger name="com.glut.repository" level="DEBUG" additivity="false">
+        <appender-ref ref="ALL_GLUT"/>
+        <appender-ref ref="STDOUT"/>
+    </logger> -->
+    
+     <!-- show parameters for hibernate sql 专为 Hibernate 定制 --> 
+   <!--  <logger name="org.hibernate.type.descriptor.sql.BasicBinder"  level="TRACE" />  
+    <logger name="org.hibernate.type.descriptor.sql.BasicExtractor"  level="DEBUG" />  
+    <logger name="org.hibernate.SQL" level="DEBUG" /> 
+    <logger name="org.hibernate.engine.QueryParameters" level="DEBUG" />
+    <logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" />   -->
+
+	<!-- 日志输出基础级别 -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

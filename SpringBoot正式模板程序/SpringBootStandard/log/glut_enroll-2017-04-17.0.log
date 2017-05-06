@@ -1,0 +1,2 @@
+[2017-04-17 22:14:28][WARN ][http-nio-8080-exec-1][com.glut.controller.LogController.testLog:22]:准备抛出异常
+[2017-04-17 22:14:28][ERROR][http-nio-8080-exec-1][com.glut.controller.LogController.testLog:25]:异常出现！！：异常异常！

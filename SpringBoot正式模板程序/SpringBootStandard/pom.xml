@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.glut</groupId>
+	<artifactId>enroll_sys</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>enroll_sys</name>
+	
+	<!-- 常规配置 -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<springBoot.groupId>org.springframework.boot</springBoot.groupId>
+	</properties>
+	
+	<!-- SpringBoot支持 -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.1.RELEASE</version>
+	</parent>
+	
+	<dependencies>
+	<!-- SpringBoot Start -->
+		<dependency>
+			<groupId>${springBoot.groupId}</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<dependency>
+         <groupId>${springBoot.groupId}</groupId>
+         <artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		
+		<!-- Hot Deploy -->
+		<dependency>
+			<groupId>${springBoot.groupId}</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+			<scope>true</scope>
+		</dependency>
+		
+		<!-- SpringData -->
+		<dependency>
+			<groupId>${springBoot.groupId}</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<!-- thymeleaf model -->
+		<dependency>
+			<groupId>${springBoot.groupId}</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>${springBoot.groupId}</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+	<!-- SpringBoot End -->
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.15</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>${springBoot.groupId}</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
